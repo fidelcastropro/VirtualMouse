@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Mouse using OpenCV & MediaPipe</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: #f6f6f6;
+            line-height: 1.6;
+        }
+        header {
+            background: #222;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+        }
+        h1,h2,h3 {
+            color: #222;
+        }
+        code {
+            background: #eee;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        pre {
+            background: #1e1e1e;
+            color: #dcdcdc;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #222;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Virtual Mouse using OpenCV, MediaPipe & Python</h1>
+    <p>Control your computer mouse through hand gestures using computer vision.</p>
+</header>
+
+<div class="container">
+
+    <div class="section">
+        <h2>📌 Project Overview</h2>
+        <p>
+            This project creates a <strong>Virtual Mouse</strong> controlled entirely by hand gestures 
+            using <strong>OpenCV</strong>, <strong>MediaPipe Hands</strong>, <strong>PyAutoGUI</strong>, and <strong>Pynput</strong>.
+            It tracks your hand in real-time and performs:
+        </p>
+
+        <ul>
+            <li>🖱️ Mouse Movement</li>
+            <li>👆 Left Click</li>
+            <li>👉 Right Click</li>
+            <li>👆👆 Double Click</li>
+        </ul>
+
+        <p>The gestures are identified by measuring <strong>angle between finger joints</strong> and 
+           <strong>distance between thumb and index finger</strong>.</p>
+    </div>
+
+    <div class="section">
+        <h2>📌 Technologies Used</h2>
+        <ul>
+            <li><strong>OpenCV</strong> – for real-time webcam processing</li>
+            <li><strong>MediaPipe Hands</strong> – for 21 hand landmark detection</li>
+            <li><strong>PyAutoGUI</strong> – to control the mouse pointer</li>
+            <li><strong>Pynput</strong> – for performing mouse click actions</li>
+            <li><strong>NumPy</strong> – for angle computations</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📌 How It Works</h2>
+
+        <h3>1. Hand Landmark Detection</h3>
+        <p>
+            MediaPipe detects <strong>21 key points</strong> on the hand. Each landmark has an <code>x</code> and <code>y</code> coordinate normalized between 0 and 1.
+        </p>
+
+        <h3>2. Gesture Recognition</h3>
+        <p>The system calculates:</p>
+        <ul>
+            <li><strong>Distance</strong> between thumb tip and index finger base</li>
+            <li><strong>Angle</strong> of index and middle finger</li>
+        </ul>
+
+        <p>
+            Based on gesture conditions:
+        </p>
+
+        <pre><code>
+Mouse Move     → Thumb closed + Both finger angles high  
+Left Click     → Thumb open + Index finger bent  
+Right Click    → Thumb open + Middle finger bent  
+Double Click   → Both index & middle fingers bent  
+        </code></pre>
+    </div>
+
+    <div class="section">
+        <h2>📌 Full Project Code</h2>
+        <p>Below is the exact source code with gesture logic, mouse mapping, and camera processing:</p>
+
+<pre><code>
+YOUR CODE HERE (same code you pasted)
+</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>📌 Code Explanation</h2>
+
+        <h3>🔹 Importing Libraries</h3>
+        <pre><code>
+import cv2, mediapipe, numpy, pyautogui, pynput
+        </code></pre>
+        <p>Each library handles detection, math, and mouse control.</p>
+
+        <h3>🔹 Calculating Finger Angle</h3>
+        <p>Used to evaluate whether fingers are straight or bent.</p>
+
+<pre><code>
+def calculate_Angle(points):
+    a, b, c = points
+    angle = |angle between vectors BA and BC|
+</code></pre>
+
+        <h3>🔹 Mouse Movement Mapping</h3>
+        <p>The index fingertip landmark (<code>id = 8</code>) maps to screen coordinates.</p>
+
+<pre><code>
+x = index_finger.x * screenWidth
+y = index_finger.y * screenHeight
+pyautogui.moveTo(x, y)
+</code></pre>
+
+        <h3>🔹 Detecting Gestures</h3>
+        <pre><code>
+if thumb close + both fingers straight → move mouse  
+if thumb open + index bent → left click  
+if thumb open + middle bent → right click  
+if both bent → double click  
+        </code></pre>
+
+        <h3>🔹 Camera Loop</h3>
+        <p>
+            A continuous loop reads webcam frames, processes landmarks, and displays the result.
+        </p>
+
+<pre><code>
+while cam.isOpened():
+    read frame
+    detect landmarks
+    call detectGesture()
+</code></pre>
+
+    </div>
+
+    <div class="section">
+        <h2>📌 Output Preview</h2>
+        <ul>
+            <li>🖐 Real-time hand detection</li>
+            <li>🟢 Gesture status text displayed on screen</li>
+            <li>🖱 Accurate mouse pointer control</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📌 Conclusion</h2>
+        <p>
+            This project demonstrates how hand-tracking can replace physical hardware using computer vision techniques.
+            It can be extended into:
+        </p>
+
+        <ul>
+            <li>Touchless UI systems</li>
+            <li>Gesture-based robotics control</li>
+            <li>Sign-language detection</li>
+            <li>Virtual/AR interactions</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    Created using OpenCV, MediaPipe & Python | Virtual Mouse Project
+</footer>
+
+</body>
+</html>
