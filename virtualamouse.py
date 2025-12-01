@@ -77,6 +77,7 @@ draw = mp.solutions.drawing_utils
 
 def main():
     cam = cv.VideoCapture(0)
+    print("Camera Started")
     stage = 'up'
     try :
         while cam.isOpened():
